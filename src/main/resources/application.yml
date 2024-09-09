@@ -1,0 +1,66 @@
+server:
+  port: 8080
+  error:
+    include-binding-errors: always
+    include-message: always
+    include-stacktrace: never
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cookerytech_db
+    username: db_user
+    password: db_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      '[hibernate.format_sql]': true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: coderunnersmate@gmail.com
+    password: ivnuilnnhujbfzec
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+#image
+servlet:
+  multipart:
+    max-file-size: 2MB
+    max-request-size: 2MB
+
+
+logging:
+  file:
+    name: log/cookerytech.log
+  pattern:
+    file: "%d %-5level [%thread] %logger:%msg%n"
+  level:
+    '[org.springframework.web]' : WARN
+    '[org.hibernate]' : INFO
+    '[com.saferent]' : DEBUG
+management: #actuator
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+cookerytech:
+  app:
+    jwtSecret: cookerytech@!10
+    jwtExpirationMs: 86400000
+
+info:
+  application:
+    name: 'CookeryTech Backend App'
+    description: 'This is CookeryTech Backend Project'
+    version: '@project.version@'
+
